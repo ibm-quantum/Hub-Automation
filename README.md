@@ -1,3 +1,12 @@
+## Introduction
+
+**Welcome to Hub Automation!**
+
+This this collection of scripts and the repo are here for your self improvement and to allow for the sharing of automation amongst the IBM Quantum Network community of members. Please feel free to contribute your enhancements, and to propose new scripts, features, and fixes as appropriate.  While we (IBM Quantum will monitor this repo, and contribute as we are able, this is a community project. 
+
+This being said, we are excited to hear from you! We welcome your issues and PRs. Please do see the section at the end of the Readme regarding contributions.
+
+
 ## Setup
 1. Download the individual files needed, as well as the `auth.py` file.
 2. Set the `LOGIN_TOKEN` in `auth.py` to your IBM Quantum Experience Token. 
@@ -73,4 +82,6 @@ Duplicate `user` entries are not accepted, and only the first instance of that `
 **Usage**:</br>
 &ensp;`python get_analytics_for_users.py <hub>`
 
+## How to contribute
 
+Contributions are welcomed as long as the stick to the git-flow: fork this repo, create a local branch named 'feature-XXX'. Commit often. Split it in multiple commits and request a merge to the mainline often. When you contribute code, you affirm that the contribution is your original work and that you license the work to the project under the project’s open source license. Whether or not you state this explicitly, by submitting any copyrighted material via pull request, email, or other means you agree to license the material under the project’s open source license and warrant that you have the legal authority to do so.

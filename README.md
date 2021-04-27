@@ -2,7 +2,7 @@
 
 **Welcome to Hub Automation!**
 
-This this collection of scripts and the repo are here for your self improvement and to allow for the sharing of automation amongst the IBM Quantum Network community of members. Please feel free to contribute your enhancements, and to propose new scripts, features, and fixes as appropriate.  While we (IBM Quantum will monitor this repo, and contribute as we are able, this is a community project. 
+This this collection of scripts and the repo are here for your self improvement and to allow for the sharing of automation amongst the IBM Quantum Network community of members. Please feel free to contribute your enhancements, and to propose new scripts, features, and fixes as appropriate.  While we (IBM Quantum) will monitor this repo, and contribute as we are able, this is a community project. 
 
 This being said, we are excited to hear from you! We welcome your issues and PRs. Please do see the section at the end of the Readme regarding contributions.
 

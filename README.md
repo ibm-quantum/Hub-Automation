@@ -82,6 +82,19 @@ Duplicate `user` entries are not accepted, and only the first instance of that `
 **Usage**:</br>
 &ensp;`python get_analytics_for_users.py <hub>`
 
+-----
+
+### get_backend_info.py
+**What it does**: Retreives a list of backend system names from either an entire Hub or a specific Project</br>
+**Parameters**:</br>
+&ensp;`<hub>`: Required. The name of your hub.</br>
+&ensp;`<-group>`: Optional. The name of the parent group.</br>
+&ensp;`<-project>`: Optional. The name of the project.</br>
+&ensp;`<--full_data>`: Optional. Prints out the entirety of the backend data.</br>
+**Usage**:</br>
+&ensp;`python get_backend_info.py <hub> <-group> <-project> --full_data`
+
+
 ## How to contribute
 
 Contributions are welcomed as long as the stick to the git-flow: fork this repo, create a local branch named 'feature-XXX'. Commit often. Split it in multiple commits and request a merge to the mainline often. When you contribute code, you affirm that the contribution is your original work and that you license the work to the project under the project’s open source license. Whether or not you state this explicitly, by submitting any copyrighted material via pull request, email, or other means you agree to license the material under the project’s open source license and warrant that you have the legal authority to do so.

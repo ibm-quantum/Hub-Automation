@@ -110,6 +110,20 @@ Duplicate `user` entries are not accepted, and only the first instance of that `
 &ensp;If adding: `python edit_backends.py <hub> add <group> <backend_name> -project <project> -priority <priority>`</br>
 &ensp;If removing: `python edit_backends.py <hub> remove <group> <backend_name> -project <project> -priority <priority>`
 
+-----
+
+### edit_backends_in_all_projects.py
+**What it does**: Adds or Removes a backend from all Projects in a Group within your Hub</br>
+**Parameters**:</br>
+&ensp;`<hub>`: Required. The name of your hub.</br>
+&ensp;`<action>`: Required. Either `add` or `remove`.</br>
+&ensp;`<group>`: Required. The name of the parent group.</br>
+&ensp;`<backend>`: Required. The name of the backend to add or remove.</br>
+&ensp;`<-priority>`: Required for `add` action. Integer priority of the backend, between 1 and 10,000.</br>
+
+**Usage**:</br>
+&ensp;If adding: `python edit_backends_in_all_projects.py <hub> add <group> <backend_name> -priority <priority>`</br>
+&ensp;If removing: `python edit_backends_in_all_projects.py <hub> remove <group> <backend_name>`
 
 ## How to contribute
 

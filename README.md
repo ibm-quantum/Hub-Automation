@@ -28,8 +28,10 @@ If you experience an `AUTHORIZATION_REQUIRED` error or a `401` status code, doub
 &ensp;`<action>`: Required. Either 'add' or 'remove'.</br>
 &ensp;`<group_name>`: Required. The name of the group being added or removed.</br>
 &ensp;`<group_title>`: Optional. Triggered by the `-t` flag. Only required if adding a group. The title of the group being added.</br>
+&ensp;`<share>`: Optional. Triggered by the `-s` flag. Only required if adding a group. The share of the total group share that this new group will receive. Should be an integer.</br>
+
 **Usage**:</br>
-&ensp;If adding group: `python edit_group.py <hub> add <group_name> -t <group_title>`</br>
+&ensp;If adding group: `python edit_group.py <hub> add <group_name> -t <group_title> -s <share>`</br>
 &ensp;If removing group: `python edit_group.py <hub> remove <group_name>`</br>
 
 -----
@@ -42,8 +44,10 @@ If you experience an `AUTHORIZATION_REQUIRED` error or a `401` status code, doub
 &ensp;`<action>`: Required. Either 'add' or 'remove'.</br>
 &ensp;`<project_name>`: Required. The name of the project you are adding or removing.</br>
 &ensp;`<project_title>`: Optional. Triggered by the `-t` flag. Only required if adding a project. The title of the project being added.</br>
+&ensp;`<share>`: Optional. Triggered by the `-s` flag. Only required if adding a project. The share of the total project share that this new project will receive. Should be an integer.</br>
+
 **Usage**:</br>
-&ensp;If adding project: `python edit_project.py <hub> <group> add <project_name> -t <project_title>` </br>
+&ensp;If adding project: `python edit_project.py <hub> <group> add <project_name> -t <project_title> -s <share>` </br>
 &ensp;If removing project: `python edit_project.py <hub> <group> remove <project_name>`
 
 -----

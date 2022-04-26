@@ -25,12 +25,15 @@ parser.add_argument('-t', '--title', dest="group_title", nargs=1, type=str,
                     help="Title of group being added. Only required if <action> is set to 'add'. To have multiple "
                          "words in title, format with quotes around the title, or with underscores. "
                          "Example: 'Example Title' or Example_Title")
+parser.add_argument('-s', '--share', dest="share", nargs=1, type=int,
+                    help="Share value set for this group. Only required if <action> is set to 'add'")
 
 args = parser.parse_args()
 
 hub = args.hub
 group_name = args.group_name
 action = args.action
+priority = args.share
 
 if action != 'remove' and action != 'add':
     sys.exit("<action> must be set ot either 'add' or 'remove'")
@@ -50,7 +53,7 @@ if action == "add":
             sys.exit("Group Title must be a string")
 
         # Create Group
-        group_data = {"name": group_name, "title": group_title}
+        group_data = {"name": group_name, "title": group_title, "priority": priority}
         print(f"Adding {group_name} to {hub}")
 
         # POST request to add group

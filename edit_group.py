@@ -21,11 +21,11 @@ parser.add_argument('action', type=str, help="Whether you are adding or removing
                                              "either 'add' or 'remove'")
 parser.add_argument('group_name', type=str, help="Name of group being added or removed. Restricted to 16 or less chars "
                                                  "and cannot contain special chars")
-parser.add_argument('-t', '--title', dest="group_title", nargs=1, type=str,
+parser.add_argument('-t', '--title', dest="group_title", type=str,
                     help="Title of group being added. Only required if <action> is set to 'add'. To have multiple "
                          "words in title, format with quotes around the title, or with underscores. "
                          "Example: 'Example Title' or Example_Title")
-parser.add_argument('-s', '--share', dest="share", nargs=1, type=int,
+parser.add_argument('-s', '--share', dest="share", type=int,
                     help="Share value set for this group. Only required if <action> is set to 'add'")
 
 args = parser.parse_args()
@@ -41,7 +41,7 @@ if action == 'add':
     if not args.group_title:
         sys.exit("--title is required if <action> is set to 'add'")
     else:
-        group_title = args.group_title[0]
+        group_title = args.group_title
 
 access_token = get_access_token()
 headers = {"X-Access-Token": access_token}

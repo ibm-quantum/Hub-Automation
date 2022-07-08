@@ -254,6 +254,7 @@ Returns a list of data pertaining to each device within the Hub
 ### Managing Groups
 
 `POST /Network/{hubName}/Groups`
+
 Creates a new Group in the Hub
 
 **Parameters:**
@@ -279,7 +280,9 @@ Creates a new Group in the Hub
 
 -----
 
-`POST /Network/{hubName}/Groups/{groupName}/devices`</br>
+`POST /Network/{hubName}/Groups/{groupName}/devices`
+
+Adds a device to the Group
 
 **Parameters:**
 - `name`: `<str>`
@@ -306,6 +309,8 @@ response = requests.post(url=url, json=data)
 -----
 
 `GET /Network/{hubName}/Groups/{groupName}/jobs/all`
+
+Returns data about jobs that were sent from any Project within this Group
 
 **Parameters:**
 - `filter`: json object (Optional, More information in _Notes_ section)</br>
@@ -392,6 +397,8 @@ There are other stats that can also be used to filter jobs, though they are not 
 -----
 
 `POST /Network/{hubName}/Groups/{groupName}/users`
+
+Add or Remove a user as an admin to the Group
 
 **Parameters:** 
 - `add`: List of objects containing user emails being added as admin. If no users are being added, you can ignore putting this parameter completely. For more information on the format of this parameter, refer to _Notes_ section.
@@ -485,6 +492,7 @@ Returns the configuration data set for the specified device in the Hub
 -----
 
 `DELETE /Network/{hubName}/Groups/{groupName}/devices/{deviceName}`
+
 Remove the specified device from the given Group
 
 **Parameters:** None</br>
@@ -503,6 +511,7 @@ Remove the specified device from the given Group
 ### Managing Projects
 
 `POST /Network/{hubName}/Groups/{groupName}/Projects`
+
 Create a new Project in the given Hub and Group
 
 **Parameters:**
@@ -529,6 +538,8 @@ Create a new Project in the given Hub and Group
 
 `DELETE /Network/{hubName}/Groups/{groupName}/Projects/{projectName}`
 
+Deletes a Project from the Group
+
 **Parameters:** None</br>
 
 **Returns**:
@@ -541,141 +552,9 @@ Create a new Project in the given Hub and Group
 
 -----
 
-`GET /Network/{hubName}/Groups/{groupName}/Projects/{projectName}/devices`</br>
-
-**Parameters:** None</br>
-
-**Returns** List of json objects containing Project level device data.</br>
-
-**Requirements:** Hub Admin or Group Admin</br>
-
-**Notes:** Each entry in the returned list will contain a lot of data. It is recommended that you parse through the returned jsons to retrieve the specific data you are looking for. The most common piece of data you will parse for is `backend["name"]`.</br>
-
-----
-
-`POST /Network/{hubName}/Groups/{groupName}/Projects/{projectName}/devices`</br>
-
-**Parameters:**
-- `name`: `<str>`
-- `priority`: `<int>` between 1-10000</br>
-
-**Returns:** None</br>
-
-**Requirements:** Hub Admin or Group Admin</br>
-
-**Notes:** You should input the data parameters as a dictionary in the `json` parameter for a request. This is an example:</br>
-```
-data = {"name": "device_name", "priority": 1}
-response = requests.post(url=url, json=data)
-```
-
------
-
-`GET /Network/{hubName}/Groups/{groupName}/Projects/{projectName}/jobs/all`
-
-**Parameters:** None</br>
-
-**Returns**: List containing json objects with the following schema:</br>
-```
-{
-  "kind": <str>,
-  "backend": {
-      "id": <str>,
-      "name": <str>
-  },
-  "status": <str>,
-  "creationDate": <str>,
-  "objectStorageInfo": <dict>,
-  "summaryData": {
-      "size": {
-          "input": <int>,
-          "output": <int>
-      },
-      "success": <bool>,
-      "summary": {
-          "max_qubits_used": <int>,
-          "qobj_config": {
-              "memory_slots": <int>,
-              "rep_delay": <int>,
-              "n_qubits": <int>,
-              "type": <str>,
-              "shots": <int>,
-              "cost": <float>
-          },
-          "partial_validation": <bool>,
-          "gates_executed": <int>,
-          "num_circuits": <int>
-      },
-      "resultTime": <float>
-  },
-  "timePerStep": {
-      "CREATING": <str>,
-      "CREATED": <str>,
-      "VALIDATING": <str>,
-      "VALIDATED": <str>,
-      "QUEUED": <str>,
-      "RUNNING": <str>,
-      "COMPLETED": <str>
-  },
-  "hubInfo": {
-      "hub": {
-          "name": <str>
-      },
-      "group": {
-          "name": <str>
-      },
-      "project": {
-          "name": <str>
-      }
-  },
-  "endDate": <str>,
-  "cost": <float>,
-  "runMode": <str>,
-  "id": <str>,
-  "userId": <str>
-}
-```
-**Requirements**: Hub Admin or Group Admin</br>
-
-**Notes**: All of the values returned for `creationDate`, all steps in `timePerStep`, `estimatedStartTime` and `estimatedCompleteTime` in `infoQueue`, and `endDate` will always be strings in the format of a date in the UTC timezone. For example: `
-
------
-
-`POST /Network/{hubName}/Groups/{groupName}/Projects/{projectName}/users`
-
-**Parameters:** Only one of `add` or `remove` is required. If you only want to add or remove users, you do not need to include the other parameter.
-```
-{
-    "add":
-        [<email>, ...],
-    "remove":
-        [<email>, ...],
-}
-```
-
-**Returns**:
-```
-{
-  "added": {
-    "name": <str>,
-    "users": {
-      <str>: {
-        "deleted": <bool>,
-        "email": <str>,
-        "name": <str>,
-        "dateJoined": "2022-02-01T21:28:48.965Z"
-      }
-    },
-    "deleted": <bool>
-  }
-}
-```
-
-**Requirements**: Hub Admin
-
------
-
 `GET /Network/{hubName}/Groups/{groupName}/Projects/{nameProject}/devices`
+
+Returns a list of data about accessible devices within the Project
 
 **Parameters:** None</br>
 
@@ -773,11 +652,144 @@ response = requests.post(url=url, json=data)
   }
 ]
 ```
+
+**Requirements**: Hub Admin
+
+**Notes:** Each entry in the returned list will contain a lot of data. It is recommended that you parse through the returned jsons to retrieve the specific data you are looking for. The most common piece of data you will parse for is `backend["name"]`.</br>
+
+----
+
+`POST /Network/{hubName}/Groups/{groupName}/Projects/{projectName}/devices`
+
+Adds a device to the Project
+
+**Parameters:**
+- `name`: `<str>`
+- `priority`: `<int>` between 1-10000</br>
+
+**Returns:** None</br>
+
+**Requirements:** Hub Admin or Group Admin</br>
+
+**Notes:** You should input the data parameters as a dictionary in the `json` parameter for a request. This is an example:</br>
+```
+data = {"name": <device_name>, "priority": 1}
+response = requests.post(url=url, json=data)
+```
+
+-----
+
+`GET /Network/{hubName}/Groups/{groupName}/Projects/{projectName}/jobs/all`
+
+Returns data about jobs that were sent from Project
+
+**Parameters:** None</br>
+
+**Returns**: List containing json objects with the following schema:</br>
+```
+{
+  "kind": <str>,
+  "backend": {
+      "id": <str>,
+      "name": <str>
+  },
+  "status": <str>,
+  "creationDate": <str>,
+  "objectStorageInfo": <dict>,
+  "summaryData": {
+      "size": {
+          "input": <int>,
+          "output": <int>
+      },
+      "success": <bool>,
+      "summary": {
+          "max_qubits_used": <int>,
+          "qobj_config": {
+              "memory_slots": <int>,
+              "rep_delay": <int>,
+              "n_qubits": <int>,
+              "type": <str>,
+              "shots": <int>,
+              "cost": <float>
+          },
+          "partial_validation": <bool>,
+          "gates_executed": <int>,
+          "num_circuits": <int>
+      },
+      "resultTime": <float>
+  },
+  "timePerStep": {
+      "CREATING": <str>,
+      "CREATED": <str>,
+      "VALIDATING": <str>,
+      "VALIDATED": <str>,
+      "QUEUED": <str>,
+      "RUNNING": <str>,
+      "COMPLETED": <str>
+  },
+  "hubInfo": {
+      "hub": {
+          "name": <str>
+      },
+      "group": {
+          "name": <str>
+      },
+      "project": {
+          "name": <str>
+      }
+  },
+  "endDate": <str>,
+  "cost": <float>,
+  "runMode": <str>,
+  "id": <str>,
+  "userId": <str>
+}
+```
+**Requirements**: Hub Admin or Group Admin</br>
+
+**Notes**: All of the values returned for `creationDate`, all steps in `timePerStep`, `estimatedStartTime` and `estimatedCompleteTime` in `infoQueue`, and `endDate` will always be strings in the format of a date in the UTC timezone. For example: `2022-06-29T08:02:00.550Z` would represent June 29, 2022 at 8:02am UTC
+
+-----
+
+`POST /Network/{hubName}/Groups/{groupName}/Projects/{projectName}/users`
+
+Add or Remove a user from the Project
+
+**Parameters:** Only one of `add` or `remove` is required. If you only want to add or remove users, you do not need to include the other parameter.
+```
+{
+    "add":
+        [<email>, ...],
+    "remove":
+        [<email>, ...],
+}
+```
+
+**Returns**:
+```
+{
+  "added": {
+    "name": <str>,
+    "users": {
+      <str>: {
+        "deleted": <bool>,
+        "email": <str>,
+        "name": <str>,
+        "dateJoined": "2022-02-01T21:28:48.965Z"
+      }
+    },
+    "deleted": <bool>
+  }
+}
+```
+
 **Requirements**: Hub Admin
 
 -----
 
 `DELETE /Network/{hubName}/Groups/{groupName}/Projects/{projectName}/devices/{deviceName}`
+
+Deletes the device from the Project
 
 **Parameters:** None</br>
 
